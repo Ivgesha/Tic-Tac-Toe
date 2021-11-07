@@ -1,0 +1,517 @@
+<style>
+  .TicTacToeGame {
+    width: auto;
+    height: auto;
+    /* display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    background-color: red; */
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .bord {
+    display: grid;
+    grid-template-columns: repeat(3, 150px);
+    height: 200px;
+    border-radius: 4px;
+    background-color: white;
+  }
+  .bordBox {
+    border-style: solid;
+    border-radius: 4px;
+  }
+  .buttons {
+    display: flex;
+    margin-top: 30px;
+    flex-direction: row;
+  }
+  .buttons-btn {
+    margin: 15px 10px 10px;
+    padding: 15px;
+    font-size: 20px;
+    border-radius: 8px;
+  }
+  .btns {
+    width: 100%;
+    height: 100%;
+  }
+
+  td {
+    font-size: 50px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    vertical-align: middle;
+    width: 120px;
+    height: 120px;
+    cursor: pointer;
+  }
+
+  button {
+    background-color: white;
+    color: black;
+    border: 3px solid #008cba;
+    transition: 0.4s;
+  }
+  button:hover {
+    background-color: #008cba;
+    color: white;
+  }
+
+  .X {
+    /* background-color: #6f0000; */
+    background-color: #a43931;
+    color: white;
+    font-size: auto;
+    font-family: serif;
+  }
+
+  .O {
+    /* background-color: #3a7bd5; */
+    background-color: #2a5298;
+    color: white;
+    font-size: auto;
+    font-family: serif;
+  }
+  table {
+    /* border: 1px solid black;   */
+    /* border-collapse: collapse;   */
+    /* border-radius: 20px; */
+  }
+
+  body {
+    background-image: linear-gradient(90deg, #232526, #414345);
+  }
+
+  /* The Modal (background) */
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  }
+
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+  }
+
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  #modalParagaph,
+  #endGameModalParagraph {
+    margin-left: 50%;
+  }
+</style>
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TicTacToe</title>
+  </head>
+  <body>
+    <div class="TicTacToeGame">
+      <div class="container">
+        <h1 style="color: white; font-weight: bold; font-style: italic">
+          Tic Tac Toe
+        </h1>
+        <h2 id="h2_turn" style="color: white">X first</h2>
+
+        <div class="tableBox">
+          <table
+            border="1"
+            style="background-color: white; border-radius: 20px"
+          >
+            <tr>
+              <td
+                id="b-0"
+                style="border-radius: 20px 0 0 0"
+                onclick="clickEventListener(0)"
+              ></td>
+              <td id="b-1" onclick="clickEventListener(1)"></td>
+              <td
+                id="b-2"
+                style="border-radius: 0 20px 0 0"
+                onclick="clickEventListener(2)"
+              ></td>
+            </tr>
+            <tr>
+              <td id="b-3" onclick="clickEventListener(3)"></td>
+              <td id="b-4" onclick="clickEventListener(4)"></td>
+              <td id="b-5" onclick="clickEventListener(5)"></td>
+            </tr>
+            <tr>
+              <td
+                id="b-6"
+                style="border-radius: 0 0 0 20px"
+                onclick="clickEventListener(6)"
+              ></td>
+              <td id="b-7" onclick="clickEventListener(7)"></td>
+              <td
+                id="b-8"
+                style="border-radius: 0 0 20px 0"
+                onclick="clickEventListener(8)"
+              ></td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- 
+        <div class="bord">
+             
+            <div class="bordBox"><button id="b-0" class="btns" onclick="clickEventListener(0)"></button></div>    
+            <div class="bordBox"><button id="b-1" class="btns" onclick="clickEventListener(1)"></button></div>    
+            <div class="bordBox"><button id="b-2" class="btns" onclick="clickEventListener(2)"></button></div>
+            <div class="bordBox"><button id="b-3" class="btns" onclick="clickEventListener(3)"></button></div>
+            <div class="bordBox"><button id="b-4" class="btns" onclick="clickEventListener(4)"></button></div>
+            <div class="bordBox"><button id="b-5" class="btns" onclick="clickEventListener(5)"></button></div>
+            <div class="bordBox"><button id="b-6" class="btns" onclick="clickEventListener(6)"></button></div>
+            <div class="bordBox"><button id="b-7" class="btns" onclick="clickEventListener(7)"></button></div>
+            <div class="bordBox"><button id="b-8" class="btns" onclick="clickEventListener(8)"></button></div>
+        
+        </div>
+        -->
+        <div class="buttons">
+          <button class="buttons-btn" onclick="newGameEventListener()">
+            New Game
+          </button>
+          <button class="buttons-btn" onclick="stepBackEventListener()">
+            Step back
+          </button>
+          <button class="buttons-btn" onclick="showRecordEventListener()">
+            Show record
+          </button>
+          <button class="buttons-btn" onclick="saveGameStateEventListener()">
+            Save game
+          </button>
+          <button class="buttons-btn" onclick="loadGameStateEventListener()">
+            Load game
+          </button>
+        </div>
+
+        <div id="myModal" class="modal">
+          <!-- Modal content -->
+          <div class="modal-content">
+            <span class="close" onclick="closeModalSpan(`myModal`)"
+              >&times;</span
+            >
+            <p id="modalParagaph"></p>
+          </div>
+        </div>
+
+        <div id="endGameModal" class="modal">
+          <!-- Modal content -->
+          <div class="modal-content">
+            <span class="close" onclick="closeModalSpan(`endGameModal`)"
+              >&times;</span
+            >
+            <p id="endGameModalParagraph"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  let player_1 = true;
+  let player_2 = false;
+  let counter = 9;
+  let roundWon = false;
+  let roundDraw = false;
+  let lastFilledCell;
+  let cellStack = [];
+
+  const winningCondition = [
+    [0, 1, 2],
+    [0, 4, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 4, 6],
+    [2, 5, 8],
+    [3, 4, 5],
+    [6, 7, 8],
+  ];
+
+  function clickEventListener(cell) {
+    // if allready clicked
+    if (document.getElementById(`b-${cell}`).innerText != "") {
+      return;
+    }
+
+    let btnCell;
+    player_1 == true
+      ? document.getElementById(`b-${cell}`).classList.add("X")
+      : document.getElementById(`b-${cell}`).classList.add("O");
+
+    cellStack.push(cell);
+    lastFilledCell = cell;
+    btnCell = document.getElementById(`b-${cell}`);
+    counter--;
+
+    if (player_1) {
+      // insert X
+      btnCell.innerText = "X";
+    } else {
+      // insert O
+      btnCell.innerText = "O";
+    }
+    roundWon = checkIfWin();
+    if (roundWon) {
+      saveRecord();
+      endGame();
+    }
+    roundDraw = checkIfDraw();
+    if (roundDraw) {
+      endGame();
+    }
+    player_1 = !player_1;
+    player_2 = !player_2;
+    updateTurn();
+  }
+
+  function checkIfWin() {
+    let a, b, c;
+    let check_1, check_2, check_3;
+    // check if win
+    for (let i = 0; i < winningCondition.length; i++) {
+      a = winningCondition[i][0];
+      b = winningCondition[i][1];
+      c = winningCondition[i][2];
+
+      check_1 = document.getElementById(`b-${a}`).innerText;
+      check_2 = document.getElementById(`b-${b}`).innerText;
+      check_3 = document.getElementById(`b-${c}`).innerText;
+
+      if (check_1 != "" && check_2 != "" && check_3 != "") {
+        if (check_1 == check_2 && check_2 == check_3) {
+          return true;
+          // round won!
+        }
+      }
+    }
+    return false;
+  }
+
+  function checkIfDraw() {
+    if (counter == 0) {
+      // because user can win in the last move.
+      return true;
+      // draw
+      // end game
+    }
+    return false;
+  }
+
+  // consider set at the end of the <script>
+  // a function newGameEventListener()
+  // that way you will start new game allways;
+  function newGameEventListener() {
+    player_1 = true;
+    player_2 = false;
+    let cell;
+    counter = 9;
+    cellStack = [];
+    // Reset the ui
+    document.getElementById("h2_turn").innerText = "X first";
+    for (let i = 0; i < 9; i++) {
+      cell = document.getElementById(`b-${i}`);
+      cell.innerText = "";
+      cell.classList.remove("X", "O");
+    }
+  }
+
+  function stepBackEventListener() {
+    let popedCell;
+    let btnCell;
+    // checking the cellStack to be sure.
+    if (cellStack.length > 0) {
+      popedCell = cellStack.pop();
+      btnCell = document.getElementById(`b-${popedCell}`);
+      btnCell.innerText = "";
+      btnCell.classList.remove("X", "O");
+      player_1 = !player_1;
+      player_2 = !player_2;
+      counter++;
+      roundWon = false;
+      roundDraw = false;
+      updateTurn();
+    }
+  }
+
+  function saveRecord() {
+    let record = 9 - counter;
+    let oldRecord = localStorage.getItem("record");
+    if (oldRecord == null) oldRecord = 9;
+    if (record <= oldRecord) {
+      localStorage.setItem("record", record);
+    }
+  }
+
+  function showRecordEventListener() {
+    let modal = document.getElementById("myModal");
+    let record = localStorage.getItem("record");
+    modal.style.display = "block";
+    document.getElementById("modalParagaph").innerText =
+      record == null
+        ? "There are no records yet!"
+        : `The record is: ${record}!`;
+  }
+
+  // modal is the ID of the div.
+  function closeModalSpan(modal) {
+    document.getElementById(`${modal}`).style.display = "none";
+    if (modal == "endGameModal") {
+      // if we are at endGameModel, we reseting the game.
+      newGameEventListener();
+    }
+  }
+
+  function saveGameStateEventListener() {
+    // save everything to local storage.
+    let box;
+    let boxes = [];
+
+    /*
+    Running of every cell andsaving it state.
+    Note: if the cell is empty, we are saving it as 0 (zero).
+    It will help us parser in back from string in loadGameStateEventListener function.
+    */
+    for (let i = 0; i < 9; i++) {
+      box = document.getElementById(`b-${i}`);
+      boxes[i] = box.innerText == "" ? "0" : box.innerText; // saves the boxes as O or X or '' nothing.
+    }
+
+    // saving states to localStorage
+    localStorage.setItem("boxes", boxes);
+    localStorage.setItem("player_1", player_1);
+    localStorage.setItem("player_2", player_2);
+    localStorage.setItem("counter", counter);
+    localStorage.setItem("cellStack", cellStack);
+  }
+
+  function loadGameStateEventListener() {
+    // load every state from local storage.
+    let box;
+    let player;
+    let boxes;
+    let stringStack;
+    player = localStorage.getItem("player_1");
+    boxes = localStorage.getItem("boxes");
+
+    // empty cellStack
+    cellStack = [];
+
+    /* when we are pooling from localStorage, it will return as STRING 
+    therefor we are 'cacsting' */
+    if (player == "true") {
+      player_1 = true;
+      player_2 = false;
+    } else {
+      player_1 = false;
+      player_2 = true;
+    }
+
+    // counter = how much steps we did.
+    counter = localStorage.getItem("counter");
+    stringStack = localStorage.getItem("cellStack");
+    stringStack = stringStack.replace(/,/g, "");
+
+    /* After we removed all commas from the stringStack,
+    we are running on it and casting to int and inserting back to an empty stack.*/
+    for (let i = 0; i < stringStack.length; i++) {
+      cellStack.push(parseInt(stringStack[i], 10));
+    }
+
+    // boxes if the 'full' cells that we had.
+    //  getting the string with commas from localStorage,
+    // removing commas, and updating the UI
+    boxes = boxes.replace(/,/g, "");
+    for (let i = 0; i < boxes.length; i++) {
+      box = document.getElementById(`b-${i}`);
+      if (boxes[i] == "X") {
+        box.innerText = "X";
+        box.classList.add("X");
+      } else if (boxes[i] == "O") {
+        box.innerText = "O";
+        box.classList.add("O");
+      } else {
+        box.classList.remove("X", "O");
+        box.innerText = "";
+      }
+    }
+    updateTurn();
+  }
+
+  function updateTurn() {
+    let playersTurn = document.getElementById("h2_turn");
+    if (player_1 == true) playersTurn.innerText = "X's turn";
+    else playersTurn.innerText = "O's turn";
+  }
+
+  function endGame() {
+    let winner = player_1 == true ? "X" : "O";
+    let finishText = document.getElementById("endGameModalParagraph");
+    endGameModal.style.display = "block";
+    if (roundWon) {
+      finishText.innerText = `${winner} is the winner!`;
+    } else {
+      finishText.innerText = `Its a draw!`;
+    }
+  }
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function (event) {
+    let modal = document.getElementById("myModal");
+    let endGameModal = document.getElementById("endGameModal");
+    if (event.target == modal) {
+      modal.style.display = "none";
+    } else if (event.target == endGameModal) {
+      endGameModal.style.display = "none";
+      newGameEventListener();
+    }
+  };
+
+  /*
+
+const testArr = [0,1,2];
+
+function testWinCondition(){
+console.log(" -------- Start testWinCondition() -------- ");
+    for(let i of testArr){
+        document.getElementById(`b-${i}`).innerText = 1;
+        let res = checkIfWin();
+        console.log(res);
+    }
+}
+testWinCondition();
+
+*/
+</script>
